@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>main curl test file</title>
+
+<script>
+
+	curl = {
+		paths: {
+			curl: '../src/curl/'
+		}
+	};
+
+</script>
+<script src="../src/curl.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	var start = new Date();
+	curl(
+		[
+			'utils/console',
+			'utils/string',
+			'hello/hello',
+			//on attend la fin de chargement du DOM pour exécuter la fonction
+			'domReady!'
+		],
+		function (console,fn, hello) {
+			console.log('total time:', new Date() - start);
+			document.getElementById("welcome").innerHTML = "hello world apparait ci-dessous si les modules sont charges: <br> " 
+									+  fn.capitalizeFirst(hello);
+		}
+	);
+
+</script>
+
+</head>
+<body>
+
+<p id="welcome"></p>
+</body>
+</html>

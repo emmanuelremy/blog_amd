@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>main curl test file</title>
+
+<script>
+
+	curl = {
+		paths: {
+			curl: '../src/curl/',
+			jquery: 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min'
+
+		},
+		locale: 'fr'
+	};
+
+</script>
+<script src="../src/curl.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	var start = new Date();
+	//on s'assure du chargement du DOM, de CSS, et de la console
+	curl(['domReady!','css!stuff/base','utils/console'
+		//,'utils/modulenotfound'
+	     ])
+	.then(
+		function () {
+			console.log('Chargement fini');
+		},
+		function(ex) {
+			alert("Oups: " + ex);
+		}
+	)
+	.next( [
+		//notons que la console n'est pas chargee 2 fois...
+		'utils/console',
+		'utils/string',
+		'hello/hello',
+		'js!utils/mustache.js!order!exports=Mustache',
+		'jquery'
+		],
+		function (console,fn, hello, tpl,$) {
+			console.log('total time:', new Date() - start);
+			var view = { bonjour : fn.capitalizeFirst(hello) } ;
+			var output = tpl.render("Hello world apparait ci-dessous  avec Mustache si les modules sont charges: <br> {{bonjour}} ", view);
+			//document.getElementById("welcome").innerHTML = output; 
+			$('#welcome').html(output); 
+									  
+		}
+	);
+
+</script>
+
+</head>
+<body>
+
+<p id="welcome"></p>
+</body>
+</html>

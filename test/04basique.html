@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>main curl test file</title>
+
+<script>
+
+	curl = {
+		paths: {
+			curl: '../src/curl/'
+		}
+	};
+
+</script>
+<script src="../src/curl.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	var start = new Date();
+	//on s'assure du chargement du DOM, de CSS, et de la console
+	curl(['domReady!','css!stuff/base','utils/console'
+		//,'utils/modulenotfound'
+	     ])
+	.then(
+		function () {
+			console.log('Chargement fini');
+		},
+		function(ex) {
+			alert("Oups: " + ex);
+		}
+	)
+	.next( [
+		//notons que la console n'est pas chargee 2 fois...
+		'utils/console',
+		'utils/string',
+		'hello/hello',
+		],
+		function (console,fn, hello) {
+			console.log('total time:', new Date() - start);
+			document.getElementById("welcome").innerHTML = "hello world apparait ci-dessous si les modules sont charges: <br> " 
+									+  fn.capitalizeFirst(hello);
+		}
+	);
+
+</script>
+
+</head>
+<body>
+
+<p id="welcome"></p>
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* widget.css */
+.twitterWidget {
+	border: 1px solid #eeeeee;
+	width: 400px;
+	padding: 10px;
+	overflow: hidden;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size:0.8em;	 
+}
+
+.twitterWidget a {
+        color: #0092C9 
+}
+
+
+.twitterWidget .date {
+	font-size:0.8em; 
+}
+
+.twitterWidget h3 {
+	font-size: 1.0em;
+	font-style: italic;
+	text-align: left;
+	margin: 0px;
+}
+
+.twitterWidget .avatar {
+	float: left;
+	margin: 4px 12px 6px 0px;
+	max-width: 75px;
+	max-height: 75px;
+}
