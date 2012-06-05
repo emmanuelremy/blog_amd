@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Test de la timeline</title>
+
+<script>
+
+    curl = {
+        paths: {
+            curl    : '../src/curl/',
+            jquery  : 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min'
+        }
+    };
+
+</script>
+<script src="../src/curl.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    var start = new Date();
+    //on s'assure du chargement du DOM, de CSS, et de la console
+    curl(['utils/console', 'domReady!'], 
+        function (console) {
+            console.log('total time:', new Date() - start);
+            document.getElementById("read").onclick = function() {
+                curl(['widget/twitter/timeline'],function(TimelineTwitter) { 
+                    var user = document.getElementById("user").value || document.getElementById("liste").value;
+                    var tm = new TimelineTwitter(user, 8, document.getElementById("tweetsNode"));
+                    tm.render();
+                });
+            };                                    
+        }
+    );
+
+</script>
+
+</head>
+<body>
+<div>
+<label>Lire les 8 derniers tweets de @</label><input type="text" id="user" value="" /> 
+ou 
+<select id="liste">
+       <option>ippontech
+       <option>antoine_sd
+       <option>juliendubois
+       <option>TweetingFroggy
+       <option>farrault
+       <option>ChuckyNorris_fr
+       <option>manuremy
+</select>
+<button id="read">Et hop !</button><br>
+<div>
+<div id="tweetsNode" style="margin-top:20px"></div>
+</body>
+</html>

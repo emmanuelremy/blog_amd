@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Test de chargement de modules avec dépendance</title>
+<META http-equiv="Content-Type" Content="text/html; charset=UTF-8">
+<script>
+
+	curl = {
+		paths: {
+			curl: '../src/curl/'
+		}
+	};
+
+</script>
+<script src="../src/curl.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	var start = new Date();
+	curl(
+		[
+			'utils/console',
+			'utils/string',
+			'client/hello',
+		],
+		function (console,fn, hello) {
+			console.log('total time:', new Date() - start);
+			if (document.body) {
+				document.body.appendChild(document.createTextNode('"Hello world" apparait ci-dessous si les modules sont chargés: '));
+				document.body.appendChild(document.createElement('br'));
+				document.body.appendChild(document.createTextNode(fn.capitalizeFirst(hello)));
+			}
+		}
+	);
+
+</script>
+
+</head>
+<body>
+<p style="color:blue"> Le texte qui suit est chargé en fin de body, sans assurance que le DOM soit vraiment prêt... </p>
+</body>
+</html>

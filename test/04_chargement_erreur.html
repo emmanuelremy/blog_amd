@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Test de chargement avec erreur interceptable</title>
+<META http-equiv="Content-Type" Content="text/html; charset=UTF-8"> 
+<script>
+
+	curl = {
+		paths: {
+			curl: '../src/curl/'
+		}
+	};
+
+</script>
+<script src="../src/curl.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	var start = new Date();
+	//on s'assure du chargement du DOM, de CSS, et de la console
+	curl(['domReady!','css!client/style','utils/console'
+		,'utils/modulenotfound'
+	     ])
+	.then(
+		function () {
+			//if (window.console) console.log('Chargement fini');
+		},
+		function(ex) {
+			document.getElementById("error").innerHTML = "Message d'erreur: <br>" + ex;
+		}
+	)
+	.next( [
+		//notons que la console n'est pas chargee 2 fois...
+		'utils/console',
+		'utils/string',
+		'client/hello',
+		],
+		function (console,fn, hello) {
+			console.log('total time:', new Date() - start);
+			document.getElementById("welcome").innerHTML = "hello world apparait ci-dessous si les modules sont charges: <br> " 
+									+  fn.capitalizeFirst(hello);
+		}
+	);
+
+</script>
+
+</head>
+<body>
+<p> Le module utils/modulenotfound n'existe pas, on obtient donc une erreur gérable</p> 
+<p id="welcome"></p>
+<p id="error" style="background-color:red;color:white"></p>
+</body>
+</html>

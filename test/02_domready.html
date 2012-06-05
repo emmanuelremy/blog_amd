@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Test de chargement avec dom ready</title>
+<META http-equiv="Content-Type" Content="text/html; charset=UTF-8"> 
+<script>
+
+	curl = {
+		paths: {
+			curl: '../src/curl/'
+		}
+	};
+
+</script>
+<script src="../src/curl.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+	var start = new Date();
+	curl(
+		[
+			'utils/console',
+			'utils/string',
+			'client/hello',
+			//on attend la fin de chargement du DOM pour exécuter la fonction
+			'domReady!'
+		],
+		function (console,fn, hello) {
+			console.log('total time:', new Date() - start);
+			document.getElementById("welcome").innerHTML = "Hello world apparait ci-dessous si les modules sont charges: <br> " 
+									+  fn.capitalizeFirst(hello);
+		}
+	);
+
+</script>
+
+</head>
+<body>
+
+<p style="color:blue"> Le texte qui suit est chargé avec assurance que le DOM est prêt; on peut donc référencer un <i>id</i>... </p>
+<p id="welcome"></p>
+</body>
+</html>

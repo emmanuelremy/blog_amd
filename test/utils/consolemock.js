@@ -1,0 +1,1 @@
+define({ log: function(){} } );
