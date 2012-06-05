@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>main curl test file</title>
-
+<title>Test de chargement avec erreur interceptable</title>
+<META http-equiv="Content-Type" Content="text/html; charset=UTF-8"> 
 <script>
 
 	curl = {
@@ -18,22 +18,22 @@
 
 	var start = new Date();
 	//on s'assure du chargement du DOM, de CSS, et de la console
-	curl(['domReady!','css!stuff/base','utils/console'
-		//,'utils/modulenotfound'
+	curl(['domReady!','css!client/style','utils/console'
+		,'utils/modulenotfound'
 	     ])
 	.then(
 		function () {
-			console.log('Chargement fini');
+			//if (window.console) console.log('Chargement fini');
 		},
 		function(ex) {
-			alert("Oups: " + ex);
+			document.getElementById("error").innerHTML = "Message d'erreur: <br>" + ex;
 		}
 	)
 	.next( [
 		//notons que la console n'est pas chargee 2 fois...
 		'utils/console',
 		'utils/string',
-		'hello/hello',
+		'client/hello',
 		],
 		function (console,fn, hello) {
 			console.log('total time:', new Date() - start);
@@ -46,7 +46,8 @@
 
 </head>
 <body>
-
+<p> Le module utils/modulenotfound n'existe pas, on obtient donc une erreur gérable</p> 
 <p id="welcome"></p>
+<p id="error" style="background-color:red;color:white"></p>
 </body>
 </html>

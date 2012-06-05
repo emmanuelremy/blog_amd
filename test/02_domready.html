@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>main curl test file</title>
-
+<title>Test de chargement avec dom ready</title>
+<META http-equiv="Content-Type" Content="text/html; charset=UTF-8"> 
 <script>
 
 	curl = {
@@ -21,15 +21,13 @@
 		[
 			'utils/console',
 			'utils/string',
-			'hello/hello',
-			//on ajoute le chargement d'une feuille de style
-			'css!stuff/base',
+			'client/hello',
 			//on attend la fin de chargement du DOM pour exécuter la fonction
 			'domReady!'
 		],
 		function (console,fn, hello) {
 			console.log('total time:', new Date() - start);
-			document.getElementById("welcome").innerHTML = "hello world apparait ci-dessous si les modules sont charges: <br> " 
+			document.getElementById("welcome").innerHTML = "Hello world apparait ci-dessous si les modules sont charges: <br> " 
 									+  fn.capitalizeFirst(hello);
 		}
 	);
@@ -39,6 +37,7 @@
 </head>
 <body>
 
+<p style="color:blue"> Le texte qui suit est chargé avec assurance que le DOM est prêt; on peut donc référencer un <i>id</i>... </p>
 <p id="welcome"></p>
 </body>
 </html>

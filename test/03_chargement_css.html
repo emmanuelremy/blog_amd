@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>main curl test file</title>
-
+<title>Test de chargement avec dom ready et CSS</title>
+<META http-equiv="Content-Type" Content="text/html; charset=UTF-8">
 <script>
 
 	curl = {
@@ -21,13 +21,15 @@
 		[
 			'utils/console',
 			'utils/string',
-			'hello/hello',
+			'client/hello',
+			//on ajoute le chargement d'une feuille de style
+			'css!client/style',
 			//on attend la fin de chargement du DOM pour exécuter la fonction
 			'domReady!'
 		],
 		function (console,fn, hello) {
 			console.log('total time:', new Date() - start);
-			document.getElementById("welcome").innerHTML = "hello world apparait ci-dessous si les modules sont charges: <br> " 
+			document.getElementById("welcome").innerHTML = "hello world apparait ci-dessous si les modules sont chargés: <br> " 
 									+  fn.capitalizeFirst(hello);
 		}
 	);
@@ -36,7 +38,7 @@
 
 </head>
 <body>
-
+<p style="color:blue"> on ajoute le chargement d'une css, texte suivant doit apparaitre <span style="color: #2faced;">en cette couleur</span></p>
 <p id="welcome"></p>
 </body>
 </html>

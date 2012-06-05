@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>main curl test file</title>
+<title>Test de la timeline</title>
 
 <script>
 
@@ -24,7 +24,7 @@
             console.log('total time:', new Date() - start);
             document.getElementById("read").onclick = function() {
                 curl(['widget/twitter/timeline'],function(TimelineTwitter) { 
-                    var user = document.getElementById("user").value;
+                    var user = document.getElementById("user").value || document.getElementById("liste").value;
                     var tm = new TimelineTwitter(user, 8, document.getElementById("tweetsNode"));
                     tm.render();
                 });
@@ -37,7 +37,18 @@
 </head>
 <body>
 <div>
-<label>Lire les 8 derniers tweets de @</label><input type="text" id="user" value="ChuckyNorris_fr" /> <button id="read">Et hop !</button><br>
+<label>Lire les 8 derniers tweets de @</label><input type="text" id="user" value="" /> 
+ou 
+<select id="liste">
+       <option>ippontech
+       <option>antoine_sd
+       <option>juliendubois
+       <option>TweetingFroggy
+       <option>farrault
+       <option>ChuckyNorris_fr
+       <option>manuremy
+</select>
+<button id="read">Et hop !</button><br>
 <div>
 <div id="tweetsNode" style="margin-top:20px"></div>
 </body>

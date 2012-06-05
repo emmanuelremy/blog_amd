@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>main curl test file</title>
-
+<title>Test de chargement de modules avec dépendance</title>
+<META http-equiv="Content-Type" Content="text/html; charset=UTF-8">
 <script>
 
 	curl = {
@@ -21,12 +21,12 @@
 		[
 			'utils/console',
 			'utils/string',
-			'hello/hello',
+			'client/hello',
 		],
 		function (console,fn, hello) {
 			console.log('total time:', new Date() - start);
 			if (document.body) {
-				document.body.appendChild(document.createTextNode('hello world apparait ci-dessous si les modules sont charges: '));
+				document.body.appendChild(document.createTextNode('"Hello world" apparait ci-dessous si les modules sont chargés: '));
 				document.body.appendChild(document.createElement('br'));
 				document.body.appendChild(document.createTextNode(fn.capitalizeFirst(hello)));
 			}
@@ -37,9 +37,6 @@
 
 </head>
 <body>
-
-<p id="welcome"></p>
-<p>This text should all be the same <span style="color: #2faced;">color</span> if the css file loaded.</p>
-
+<p style="color:blue"> Le texte qui suit est chargé en fin de body, sans assurance que le DOM soit vraiment prêt... </p>
 </body>
 </html>
